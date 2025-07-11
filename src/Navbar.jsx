@@ -3,7 +3,7 @@ import React from "react";
 const Navbar = () => {
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-sm">
+      <div className="navbar bg-base-300 shadow-sm">
         <div className="navbar-start">
           <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
