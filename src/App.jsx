@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Profile from "./components/Profile";
 import { Provider } from "react-redux";
 import appStore from "./utilis/appStore";
-import Feed from "./components/Feed";
+import Feed from "./components/feed/Feed";
 
 const App = () => {
   return (
