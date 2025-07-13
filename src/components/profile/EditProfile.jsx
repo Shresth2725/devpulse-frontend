@@ -6,7 +6,7 @@ import { addUser } from "../../utilis/userSlice";
 import FeedCard from "../feed/FeedCard";
 
 const EditProfile = () => {
-  const user = useSelector((store) => store.User?.data);
+  const user = useSelector((store) => store.User?.data || store.User);
   const dispatch = useDispatch();
 
   const [firstName, setFirstName] = useState("");
@@ -32,15 +32,7 @@ const EditProfile = () => {
       setPhotoUrl(user.photoUrl || "");
       setIsInitialized(true);
     }
-  }, [user, isInitialized]);
-
-  if (!user || !isInitialized) {
-    return (
-      <div className="flex justify-center items-center min-h-screen text-white text-lg">
-        Loading profile...
-      </div>
-    );
-  }
+  }, [user]);
 
   const handleSubmit = async () => {
     setLoading(true);
