@@ -7,9 +7,11 @@ import ProfileCard from "./ProfileCard";
 
 const Connections = () => {
   const dispatch = useDispatch();
-  const connections = useSelector(
-    (store) => store.Connections.data || store.Connections
-  );
+  const connections = useSelector((store) => {
+    const state = store.Connections;
+    if (!state) return [];
+    return Array.isArray(state) ? state : state.data || [];
+  });
 
   const fetchConnections = async () => {
     if (connections.length > 0) return;
@@ -34,7 +36,6 @@ const Connections = () => {
       </div>
     );
   }
-
   return (
     <div className="p-6 text-white min-h-screen bg-[#12171C]">
       <h1 className="text-3xl font-bold mb-6">Connections</h1>
