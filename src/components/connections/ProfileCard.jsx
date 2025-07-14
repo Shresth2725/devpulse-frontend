@@ -1,40 +1,59 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { baseUrl } from "../../utilis/constant";
 import { useDispatch } from "react-redux";
 import { removeRequests } from "../../utilis/requestsSlice";
 
-const ProfileCard = ({ user, isRequest, onAlert }) => {
+const ProfileCard = ({ user, isRequest }) => {
   const { photoUrl, firstName, lastName, about, age, gender, _id } = user;
   const dispatch = useDispatch();
 
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
   const reviewRequest = async (status, _id) => {
     try {
-      console.log("Button clicked:", status, _id);
-
-      const res = await axios.post(
+      await axios.post(
         baseUrl + "/request/review/" + status + "/" + _id,
         {},
         { withCredentials: true }
       );
-      console.log("API success:", res.data);
-
       dispatch(removeRequests(_id));
-
-      if (onAlert) {
-        onAlert(
-          status === "accepted"
-            ? "Request accepted successfully!"
-            : "Request rejected successfully!"
-        );
-      }
+      setAlertMessage(
+        status === "accepted"
+          ? "Request accepted successfully!"
+          : "Request rejected successfully!"
+      );
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
     } catch (err) {
-      console.error("Error reviewing request:", err.message);
+      console.error(err.message);
     }
   };
 
   return (
-    <div className="bg-[#1F2937] text-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+    <div className="relative bg-[#1F2937] text-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+      {/* SUCCESS ALERT */}
+      {showAlert && (
+        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-md flex items-center z-10">
+          <svg
+            className="w-5 h-5 mr-2"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>{alertMessage}</span>
+        </div>
+      )}
+
+      {/* CARD BODY */}
       <div className="flex flex-col items-center p-6">
         <img
           src={photoUrl}
@@ -60,6 +79,7 @@ const ProfileCard = ({ user, isRequest, onAlert }) => {
         </div>
       </div>
 
+      {/* ACTION BUTTONS */}
       {isRequest && (
         <div className="flex justify-center gap-4 px-6 pb-4">
           <button
