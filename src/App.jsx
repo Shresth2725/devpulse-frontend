@@ -7,6 +7,7 @@ import appStore from "./utilis/appStore";
 import Feed from "./components/feed/Feed";
 import Connections from "./components/connections/Connections";
 import Requests from "./components/connections/Requests";
+import UserRequest from "./components/connections/userRequest";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
+              <Route path="/userRequests" element={<UserRequest />} />
             </Route>
           </Routes>
         </BrowserRouter>

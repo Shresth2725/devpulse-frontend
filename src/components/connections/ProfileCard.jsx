@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { baseUrl } from "../../utilis/constant";
 import { useDispatch } from "react-redux";
 import { removeRequests } from "../../utilis/requestsSlice";
+import { removeUserRequest } from "../../utilis/userRequestSlice";
 
-const ProfileCard = ({ user, isRequest }) => {
+const ProfileCard = ({ user, isRequest, requestId }) => {
   const { photoUrl, firstName, lastName, about, age, gender, _id } = user;
   const dispatch = useDispatch();
 
@@ -26,6 +27,20 @@ const ProfileCard = ({ user, isRequest }) => {
       );
       setShowAlert(true);
       setTimeout(() => setShowAlert(false), 3000);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const unsendRequest = async (_id) => {
+    try {
+      await axios.post(
+        baseUrl + "/request/unsend/" + _id,
+        {},
+        { withCredentials: true }
+      );
+
+      dispatch(removeUserRequest(requestId));
     } catch (err) {
       console.error(err.message);
     }
@@ -80,7 +95,7 @@ const ProfileCard = ({ user, isRequest }) => {
       </div>
 
       {/* ACTION BUTTONS */}
-      {isRequest && (
+      {isRequest === 1 && (
         <div className="flex justify-center gap-4 px-6 pb-4">
           <button
             className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition"
@@ -93,6 +108,16 @@ const ProfileCard = ({ user, isRequest }) => {
             onClick={() => reviewRequest("rejected", _id)}
           >
             Reject
+          </button>
+        </div>
+      )}
+      {isRequest === 2 && (
+        <div className="flex justify-center gap-4 px-6 pb-4">
+          <button
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+            onClick={() => unsendRequest(_id)}
+          >
+            Remove Request
           </button>
         </div>
       )}

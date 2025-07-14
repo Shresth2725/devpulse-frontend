@@ -5,6 +5,8 @@ import { baseUrl } from "../utilis/constant";
 import { removeUser } from "../utilis/userSlice";
 import { removeFeed } from "../utilis/feedSlice";
 import { resetConnections } from "../utilis/connectionsSlice";
+import { resetRequests } from "../utilis/requestsSlice";
+import { resetUserRequest } from "../utilis/userRequestSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.User);
@@ -23,6 +25,8 @@ const Navbar = () => {
       dispatch(removeUser());
       dispatch(removeFeed());
       dispatch(resetConnections());
+      dispatch(resetRequests());
+      dispatch(resetUserRequest());
       return navigate("/login");
     } catch (err) {
       console.error(err);
@@ -109,7 +113,29 @@ const Navbar = () => {
                             d="M4 4h16v16H4V4zm4 4h8v2H8V8zm0 4h6v2H8v-2z"
                           />
                         </svg>
-                        <span>Requests</span>
+                        <span>Connection Requests</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/userRequests"
+                        className="flex items-center gap-3 hover:bg-base-300 rounded-lg p-2"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m2-12H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2z"
+                          />
+                        </svg>
+                        <span>Your Requests</span>
                       </Link>
                     </li>
                   </ul>

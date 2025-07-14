@@ -23,7 +23,7 @@ const Feed = () => {
     getFeed();
   }, []);
 
-  if (Feed.length === 0) {
+  if (!userFeed || userFeed.length === 0) {
     return <div className="font-bold text-center text-xl">No User Left</div>;
   }
 
