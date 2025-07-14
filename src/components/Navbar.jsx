@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { baseUrl } from "../utilis/constant";
 import { removeUser } from "../utilis/userSlice";
-import { removeFeed } from "../utilis/feedSlice";
+import { resetFeed } from "../utilis/feedSlice";
 import { resetConnections } from "../utilis/connectionsSlice";
 import { resetRequests } from "../utilis/requestsSlice";
 import { resetUserRequest } from "../utilis/userRequestSlice";
@@ -23,7 +23,7 @@ const Navbar = () => {
         }
       );
       dispatch(removeUser());
-      dispatch(removeFeed());
+      dispatch(resetFeed());
       dispatch(resetConnections());
       dispatch(resetRequests());
       dispatch(resetUserRequest());
