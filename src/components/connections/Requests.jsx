@@ -26,6 +26,14 @@ const Requests = () => {
     fetchRequests();
   }, []);
 
+  if (!requests || requests.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-screen text-white text-xl">
+        No Request Found
+      </div>
+    );
+  }
+
   return (
     <div className="p-6 text-white min-h-screen bg-[#12171C]">
       <h1 className="text-3xl font-bold mb-6 text-center">Requests</h1>

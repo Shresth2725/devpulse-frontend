@@ -29,7 +29,7 @@ const Connections = () => {
 
   useEffect(() => {
     fetchConnections();
-  }, []);
+  }, [connections]);
 
   if (!connections || connections.length === 0) {
     return (

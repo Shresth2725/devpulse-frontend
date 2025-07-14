@@ -12,6 +12,8 @@ const requestSlice = createSlice({
     },
     removeRequests: (state, action) => {
       const idToRemove = action.payload;
+      console.log(idToRemove);
+
       return state.filter((conn) => conn?.fromUserId?._id !== idToRemove);
     },
     resetRequests: () => {

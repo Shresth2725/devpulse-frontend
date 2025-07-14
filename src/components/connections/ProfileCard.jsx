@@ -1,7 +1,37 @@
+import axios from "axios";
 import React from "react";
+import { baseUrl } from "../../utilis/constant";
+import { useDispatch } from "react-redux";
+import { removeRequests } from "../../utilis/requestsSlice";
 
-const ProfileCard = ({ user, isRequest }) => {
-  const { photoUrl, firstName, lastName, about, age, gender } = user;
+const ProfileCard = ({ user, isRequest, onAlert }) => {
+  const { photoUrl, firstName, lastName, about, age, gender, _id } = user;
+  const dispatch = useDispatch();
+
+  const reviewRequest = async (status, _id) => {
+    try {
+      console.log("Button clicked:", status, _id);
+
+      const res = await axios.post(
+        baseUrl + "/request/review/" + status + "/" + _id,
+        {},
+        { withCredentials: true }
+      );
+      console.log("API success:", res.data);
+
+      dispatch(removeRequests(_id));
+
+      if (onAlert) {
+        onAlert(
+          status === "accepted"
+            ? "Request accepted successfully!"
+            : "Request rejected successfully!"
+        );
+      }
+    } catch (err) {
+      console.error("Error reviewing request:", err.message);
+    }
+  };
 
   return (
     <div className="bg-[#1F2937] text-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
@@ -29,12 +59,19 @@ const ProfileCard = ({ user, isRequest }) => {
           </p>
         </div>
       </div>
+
       {isRequest && (
         <div className="flex justify-center gap-4 px-6 pb-4">
-          <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+          <button
+            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+            onClick={() => reviewRequest("accepted", _id)}
+          >
             Accept
           </button>
-          <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+          <button
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+            onClick={() => reviewRequest("rejected", _id)}
+          >
             Reject
           </button>
         </div>
