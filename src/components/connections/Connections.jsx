@@ -19,6 +19,8 @@ const Connections = () => {
       const res = await axios.get(`${baseUrl}/user/connection`, {
         withCredentials: true,
       });
+      console.log(res.data);
+
       dispatch(setConnections(res.data));
     } catch (err) {
       console.error("Error fetching connections:", err.message);
@@ -38,7 +40,7 @@ const Connections = () => {
   }
   return (
     <div className="p-6 text-white min-h-screen bg-[#12171C]">
-      <h1 className="text-3xl font-bold mb-6">Connections</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">Connections</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {connections.map((connection) => (
           <ProfileCard key={connection._id} user={connection} />

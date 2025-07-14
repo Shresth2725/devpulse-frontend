@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProfileCard = ({ user }) => {
+const ProfileCard = ({ user, isRequest }) => {
   const { photoUrl, firstName, lastName, about, age, gender } = user;
 
   return (
@@ -29,6 +29,16 @@ const ProfileCard = ({ user }) => {
           </p>
         </div>
       </div>
+      {isRequest && (
+        <div className="flex justify-center gap-4 px-6 pb-4">
+          <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+            Accept
+          </button>
+          <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+            Reject
+          </button>
+        </div>
+      )}
     </div>
   );
 };

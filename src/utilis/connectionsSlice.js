@@ -14,10 +14,10 @@ const connectionSlice = createSlice({
 
     removeConnection: (state, action) => {
       const idToRemove = action.payload;
-      return state.filter((conn) => conn.id !== idToRemove);
+      return state.filter((conn) => conn?._id !== idToRemove);
     },
     resetConnections: () => {
-      return null;
+      return [];
     },
   },
 });
