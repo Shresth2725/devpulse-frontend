@@ -1,5 +1,5 @@
-import Body from "./components/Body";
-import Login from "./components/Login";
+import Body from "./components/common/Body";
+import Login from "./components/auth/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Profile from "./components/profile/Profile";
 import { Provider } from "react-redux";

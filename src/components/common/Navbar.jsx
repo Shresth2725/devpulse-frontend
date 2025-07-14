@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { baseUrl } from "../utilis/constant";
-import { removeUser } from "../utilis/userSlice";
-import { resetFeed } from "../utilis/feedSlice";
-import { resetConnections } from "../utilis/connectionsSlice";
-import { resetRequests } from "../utilis/requestsSlice";
-import { resetUserRequest } from "../utilis/userRequestSlice";
+import { baseUrl } from "../../utilis/constant";
+import { removeUser } from "../../utilis/userSlice";
+import { resetFeed } from "../../utilis/feedSlice";
+import { resetConnections } from "../../utilis/connectionsSlice";
+import { resetRequests } from "../../utilis/requestsSlice";
+import { resetUserRequest } from "../../utilis/userRequestSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.User);
