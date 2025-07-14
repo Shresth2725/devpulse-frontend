@@ -23,6 +23,10 @@ const Feed = () => {
     getFeed();
   }, []);
 
+  if (Feed.length === 0) {
+    return <div className="font-bold text-center text-xl">No User Left</div>;
+  }
+
   return (
     userFeed && (
       <div className="flex justify-center my-10">
