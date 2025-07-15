@@ -10,12 +10,12 @@ const FeedCard = ({ user }) => {
 
   const handleSendRequest = async (status, _id) => {
     try {
-      const res = await axios.post(
+      await axios.post(
         baseUrl + "/request/send/" + status + "/" + _id,
         {},
         { withCredentials: true }
       );
-      console.log(res);
+      // console.log(res);
       dispatch(removeFeed(_id));
     } catch (err) {
       console.error(err.message);
@@ -27,7 +27,10 @@ const FeedCard = ({ user }) => {
       <div className="card bg-base-300 h-full shadow-xl">
         <figure className="p-6">
           <img
-            src={photoUrl}
+            src={
+              photoUrl ||
+              "https://sclpa.com/wp-content/uploads/2022/10/dummy-img-1.jpg"
+            }
             alt={firstName + " Picture"}
             className="rounded-xl object-cover max-h-60"
           />

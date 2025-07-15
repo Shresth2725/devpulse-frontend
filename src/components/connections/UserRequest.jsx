@@ -14,7 +14,7 @@ const UserRequest = () => {
       const res = await axios.get(baseUrl + "/user/request/sent", {
         withCredentials: true,
       });
-      console.log(res.data.data);
+      // console.log(res.data.data);
       dispatch(setUserRequest(res.data.data));
     } catch (err) {
       console.error("Error fetching user requests:", err.message);

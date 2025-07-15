@@ -19,9 +19,9 @@ const Connections = () => {
       const res = await axios.get(`${baseUrl}/user/connection`, {
         withCredentials: true,
       });
-      console.log(res.data);
+      // console.log(res.data.data);
 
-      dispatch(setConnections(res.data));
+      dispatch(setConnections(res.data.data));
     } catch (err) {
       console.error("Error fetching connections:", err.message);
     }
@@ -29,7 +29,7 @@ const Connections = () => {
 
   useEffect(() => {
     fetchConnections();
-  }, [connections]);
+  }, []);
 
   if (!connections || connections.length === 0) {
     return (

@@ -49,7 +49,7 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      console.log(res);
+      // console.log(res);
       dispatch(addUser(res.data.data));
       navigate("/");
     } catch (err) {
