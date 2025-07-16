@@ -148,6 +148,7 @@ const Navbar = () => {
         {user ? (
           <div className="navbar-center">
             <Link to="/" className="btn btn-ghost text-xl">
+              {/* <img src="Logo.png" alt="logo" className="w-100 h-30" /> */}
               DevPulse
             </Link>
           </div>
