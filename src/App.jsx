@@ -8,6 +8,7 @@ import Feed from "./components/feed/Feed";
 import Connections from "./components/connections/Connections";
 import Requests from "./components/connections/Requests";
 import UserRequest from "./components/connections/userRequest";
+import Notification from "./notification/Notification";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
               <Route path="/userRequests" element={<UserRequest />} />
+              <Route path="/notification" element={<Notification />} />
             </Route>
           </Routes>
         </BrowserRouter>

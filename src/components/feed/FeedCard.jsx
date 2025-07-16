@@ -1,12 +1,13 @@
 import axios from "axios";
 import React from "react";
 import { baseUrl } from "../../utilis/constant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeFeed } from "../../utilis/feedSlice";
 
 const FeedCard = ({ user }) => {
   const { photoUrl, firstName, lastName, about, _id } = user;
   const dispatch = useDispatch();
+  const loggedInUser = useSelector((store) => store.User.data);
 
   const handleSendRequest = async (status, _id) => {
     try {
@@ -15,6 +16,18 @@ const FeedCard = ({ user }) => {
         {},
         { withCredentials: true }
       );
+
+      if (status === "interested") {
+        await axios.post(
+          baseUrl + "/notification/send",
+          {
+            forUserId: _id,
+            message: `${loggedInUser.firstName} has sent you an connection request`,
+          },
+          { withCredentials: true }
+        );
+      }
+
       // console.log(res);
       dispatch(removeFeed(_id));
     } catch (err) {

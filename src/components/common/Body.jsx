@@ -6,6 +6,7 @@ import axios from "axios";
 import { baseUrl } from "../../utilis/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../utilis/userSlice";
+import { setNotification } from "../../utilis/notificationSlice";
 
 const Body = () => {
   const navigate = useNavigate();
@@ -25,8 +26,26 @@ const Body = () => {
     }
   };
 
+  const fetchNotification = async () => {
+    try {
+      const res = await axios.get(baseUrl + "/notification/receive", {
+        withCredentials: true,
+      });
+      console.log(res.data);
+
+      dispatch(setNotification(res.data.data));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    if (userData) fetchNotification();
+  });
+
   useEffect(() => {
     fetchUser();
+    if (userData) fetchNotification();
   }, []);
 
   return (

@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { baseUrl } from "../../utilis/constant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeRequests } from "../../utilis/requestsSlice";
 import { removeUserRequest } from "../../utilis/userRequestSlice";
 
 const ProfileCard = ({ user, isRequest, requestId }) => {
   const { photoUrl, firstName, lastName, about, age, gender, _id } = user;
   const dispatch = useDispatch();
+  const loggedInUser = useSelector((store) => store.User.data);
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -19,6 +20,16 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
         {},
         { withCredentials: true }
       );
+
+      await axios.post(
+        baseUrl + "/notification/send",
+        {
+          forUserId: _id,
+          message: `${loggedInUser.firstName} has ${status} your connection request`,
+        },
+        { withCredentials: true }
+      );
+
       dispatch(removeRequests(_id));
       setAlertMessage(
         status === "accepted"
