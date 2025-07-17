@@ -12,10 +12,10 @@ const FeedCard = ({ user }) => {
 
   const handleSendRequest = async (status, _id) => {
     try {
-      console.log(
-        "Sending request to:",
-        baseUrl + "/request/send/" + status + "/" + _id
-      );
+      // console.log(
+      //   "Sending request to:",
+      //   baseUrl + "/request/send/" + status + "/" + _id
+      // );
       await axios.post(
         baseUrl + "/request/send/" + status + "/" + _id,
         {},
@@ -24,7 +24,7 @@ const FeedCard = ({ user }) => {
       dispatch(removeFeed(_id));
 
       if (status === "interested") {
-        console.log("Sending notification...");
+        // console.log("Sending notification...");
         await axios.post(
           baseUrl + "/notification/send",
           {

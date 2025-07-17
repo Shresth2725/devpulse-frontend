@@ -31,7 +31,7 @@ const Body = () => {
       const res = await axios.get(baseUrl + "/notification/receive", {
         withCredentials: true,
       });
-      console.log(res.data);
+      // console.log(res.data);
 
       dispatch(setNotification(res.data.data));
     } catch (err) {
