@@ -8,7 +8,7 @@ import Feed from "./components/feed/Feed";
 import Connections from "./components/connections/Connections";
 import Requests from "./components/connections/Requests";
 import UserRequest from "./components/connections/userRequest";
-import Notification from "./notification/Notification";
+import Notification from "./components/notification/Notification";
 
 const App = () => {
   return (

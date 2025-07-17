@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { baseUrl } from "../utilis/constant";
+import { baseUrl } from "../../utilis/constant";
 import axios from "axios";
 
 const Notification = ({ notification }) => {
