@@ -4,43 +4,57 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../../utilis/userSlice";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../../utilis/constant";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
-  const [firstName, setFirstName] = useState("Shresth");
-  const [lastName, setLastName] = useState("Srivastava");
-  const [email, setEmail] = useState("Shresth@gmail.com");
-  const [password, setPassword] = useState("Shresth@1234");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleFirstName = (e) => {
-    const value = e.target.value;
-    setFirstName(value);
+    setFirstName(e.target.value);
+    if (error) setError("");
   };
 
   const handleLastName = (e) => {
-    const value = e.target.value;
-    setLastName(value);
+    setLastName(e.target.value);
+    if (error) setError("");
   };
 
   const handleEmailInput = (e) => {
-    const value = e.target.value;
-    setEmail(value);
+    setEmail(e.target.value);
+    if (error) setError("");
+  };
+
+  const handlePasswordInput = (e) => {
+    setPassword(e.target.value);
+    if (error) setError("");
   };
 
   const toggleLoginSignin = () => {
     setIsLogin(!isLogin);
+    setError("");
   };
 
-  const handlePasswordInput = (e) => {
-    const value = e.target.value;
-    setPassword(value);
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
   };
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
     try {
+      setLoading(true);
       const res = await axios.post(
         baseUrl + "/login",
         {
@@ -49,31 +63,49 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      // console.log(res);
+
       dispatch(addUser(res.data.data));
       navigate("/");
     } catch (err) {
-      setError(err.response?.data || "Something went wrong");
+      const errorMsg =
+        err.response?.data?.message ||
+        err.response?.data ||
+        "Something went wrong";
+      setError(errorMsg);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSignIn = async () => {
+    if (!firstName || !lastName || !email || !password) {
+      setError("All fields are required");
+      return;
+    }
+
     try {
+      setLoading(true);
       const res = await axios.post(
         baseUrl + "/signup",
         {
-          firstName: firstName,
-          lastName: lastName,
+          firstName,
+          lastName,
           emailId: email,
-          password: password,
+          password,
         },
         { withCredentials: true }
       );
-      // console.log(res.data.data);
+
       dispatch(addUser(res.data.data));
       navigate("/profile");
     } catch (err) {
-      console.error(err.message);
+      const errorMsg =
+        err.response?.data?.message ||
+        err.response?.data ||
+        "Something went wrong";
+      setError(errorMsg);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -82,11 +114,11 @@ const Login = () => {
       <div className="card w-96 bg-base-300 card-md shadow-sm">
         <div className="card-body">
           <h2 className="card-title justify-center text-2xl font-bold pb-2">
-            Login
+            {isLogin ? "Login" : "Sign Up"}
           </h2>
           <div>
             {!isLogin && (
-              <div>
+              <>
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend">
                     What is your First Name?
@@ -111,41 +143,59 @@ const Login = () => {
                     value={lastName}
                   />
                 </fieldset>
-              </div>
+              </>
             )}
             <fieldset className="fieldset">
               <legend className="fieldset-legend">What is your Email?</legend>
               <input
-                type="text"
+                type="email"
                 className="input"
                 placeholder="Type here"
                 onChange={handleEmailInput}
                 value={email}
+                autoComplete="email"
               />
             </fieldset>
             <fieldset className="fieldset">
               <legend className="fieldset-legend">
                 What is your Password?
               </legend>
-              <input
-                type="text"
-                className="input"
-                placeholder="Type here"
-                onChange={handlePasswordInput}
-                value={password}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="input pr-15"
+                  placeholder="Type here"
+                  onChange={handlePasswordInput}
+                  value={password}
+                  autoComplete={isLogin ? "current-password" : "new-password"}
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-6 top-1/2 transform -translate-y-1/2 text-lg text-gray-600 hover:text-blue-600"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             </fieldset>
           </div>
-          <p className="text-red-500 font-bold">{error}</p>
-          <div className="justify-center card-actions pt-2">
-            {isLogin && (
-              <button className="btn btn-primary" onClick={handleLogin}>
-                Login
+          {error && <p className="text-red-500 font-bold pt-2">{error}</p>}
+          <div className="justify-center card-actions pt-4">
+            {isLogin ? (
+              <button
+                className="btn btn-primary"
+                onClick={handleLogin}
+                disabled={loading}
+              >
+                {loading ? "Logging in..." : "Login"}
               </button>
-            )}
-            {!isLogin && (
-              <button className="btn btn-primary" onClick={handleSignIn}>
-                SignUp
+            ) : (
+              <button
+                className="btn btn-primary"
+                onClick={handleSignIn}
+                disabled={loading}
+              >
+                {loading ? "Signing up..." : "Sign Up"}
               </button>
             )}
           </div>
