@@ -1,7 +1,7 @@
-import axios from "axios";
 import React, { useEffect } from "react";
-import { baseUrl } from "../../utilis/constant";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { baseUrl } from "../../utilis/constant";
 import { setRequests } from "../../utilis/requestsSlice";
 import ProfileCard from "./ProfileCard";
 
@@ -9,20 +9,20 @@ const Requests = () => {
   const dispatch = useDispatch();
   const requests = useSelector((store) => store?.Requests);
 
-  const fetchRequests = async () => {
-    if (requests.length > 0) return;
-    try {
-      const res = await axios.get(baseUrl + "/user/request/received", {
-        withCredentials: true,
-      });
-
-      dispatch(setRequests(res.data.data));
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
   useEffect(() => {
+    const fetchRequests = async () => {
+      if (requests?.length > 0) return;
+
+      try {
+        const response = await axios.get(`${baseUrl}/user/request/received`, {
+          withCredentials: true,
+        });
+        dispatch(setRequests(response.data.data));
+      } catch (error) {
+        console.error("Failed to fetch requests:", error.message);
+      }
+    };
+
     fetchRequests();
   }, []);
 
@@ -35,7 +35,7 @@ const Requests = () => {
   }
 
   return (
-    <div className="p-6 text-white min-h-screen bg-[#12171C]">
+    <div className="p-6 min-h-screen bg-[#12171C] text-white">
       <h1 className="text-3xl font-bold mb-6 text-center">Requests</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {requests.map((connection) => (

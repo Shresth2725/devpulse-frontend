@@ -6,54 +6,75 @@ import { removeRequests } from "../../utilis/requestsSlice";
 import { removeUserRequest } from "../../utilis/userRequestSlice";
 
 const ProfileCard = ({ user, isRequest, requestId }) => {
-  const { photoUrl, firstName, lastName, about, age, gender, _id } = user;
+  const {
+    photoUrl,
+    firstName,
+    lastName,
+    about,
+    age,
+    gender,
+    _id: userId,
+  } = user;
   const dispatch = useDispatch();
-  const loggedInUser = useSelector((store) => store.User.data);
+  const loggedInUser = useSelector((store) => store.User);
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const reviewRequest = async (status, _id) => {
+  if (!user) return null;
+
+  const triggerAlert = (message) => {
+    setAlertMessage(message);
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 3000);
+  };
+
+  const reviewRequest = async (status, userId) => {
     try {
+      setLoading(true);
+
       await axios.post(
-        baseUrl + "/request/review/" + status + "/" + _id,
+        `${baseUrl}/request/review/${status}/${userId}`,
         {},
         { withCredentials: true }
       );
 
       await axios.post(
-        baseUrl + "/notification/send",
+        `${baseUrl}/notification/send`,
         {
-          forUserId: _id,
+          forUserId: userId,
           message: `${loggedInUser.firstName} has ${status} your connection request`,
         },
         { withCredentials: true }
       );
 
-      dispatch(removeRequests(_id));
-      setAlertMessage(
+      dispatch(removeRequests(userId));
+      triggerAlert(
         status === "accepted"
           ? "Request accepted successfully!"
           : "Request rejected successfully!"
       );
-      setShowAlert(true);
-      setTimeout(() => setShowAlert(false), 3000);
     } catch (err) {
       console.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const unsendRequest = async (_id) => {
+  const unsendRequest = async (userId) => {
     try {
+      setLoading(true);
       await axios.post(
-        baseUrl + "/request/unsend/" + _id,
+        `${baseUrl}/request/unsend/${userId}`,
         {},
         { withCredentials: true }
       );
-
       dispatch(removeUserRequest(requestId));
     } catch (err) {
       console.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -82,7 +103,7 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
       {/* CARD BODY */}
       <div className="flex flex-col items-center p-6">
         <img
-          src={photoUrl}
+          src={photoUrl || "/default-user.png"}
           alt={`${firstName} ${lastName}`}
           className="w-24 h-24 rounded-full object-cover border-4 border-purple-500 shadow-md"
         />
@@ -110,13 +131,15 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
         <div className="flex justify-center gap-4 px-6 pb-4">
           <button
             className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition"
-            onClick={() => reviewRequest("accepted", _id)}
+            onClick={() => reviewRequest("accepted", userId)}
+            disabled={loading}
           >
             Accept
           </button>
           <button
             className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition"
-            onClick={() => reviewRequest("rejected", _id)}
+            onClick={() => reviewRequest("rejected", userId)}
+            disabled={loading}
           >
             Reject
           </button>
@@ -126,7 +149,14 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
         <div className="flex justify-center gap-4 px-6 pb-4">
           <button
             className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition"
-            onClick={() => unsendRequest(_id)}
+            onClick={() => {
+              if (
+                window.confirm("Are you sure you want to remove this request?")
+              ) {
+                unsendRequest(userId);
+              }
+            }}
+            disabled={loading}
           >
             Remove Request
           </button>
