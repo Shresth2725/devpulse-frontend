@@ -40,10 +40,10 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-300 shadow-sm">
+      <div className="navbar bg-base-300 shadow-sm ">
         <div className="navbar-start">
           {user && (
-            <div className="drawer">
+            <div className="drawer z-10">
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
                 <label
