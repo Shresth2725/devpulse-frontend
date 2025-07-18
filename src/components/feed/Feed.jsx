@@ -23,8 +23,16 @@ const Feed = () => {
     getFeed();
   }, []);
 
-  if (!userFeed || userFeed.length === 0) {
-    return <div className="font-bold text-center text-xl">No User Left</div>;
+  if (!userFeed) {
+    return (
+      <div className="font-bold text-center text-xl mt-10">Loading...</div>
+    );
+  }
+
+  if (userFeed.length === 0) {
+    return (
+      <div className="font-bold text-center text-xl mt-10">No User Left</div>
+    );
   }
 
   return (

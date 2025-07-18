@@ -79,10 +79,10 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
   };
 
   return (
-    <div className="relative bg-[#1F2937] text-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+    <div className="relative bg-base-200 text-base-content rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
       {/* SUCCESS ALERT */}
       {showAlert && (
-        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-md flex items-center z-10">
+        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-success text-success-content px-4 py-2 rounded-lg shadow-md flex items-center z-10">
           <svg
             className="w-5 h-5 mr-2"
             fill="none"
@@ -110,18 +110,16 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
         <h2 className="mt-4 text-xl font-semibold text-center">
           {firstName} {lastName}
         </h2>
-        <p className="text-gray-300 text-sm mt-1 text-center px-2">
+        <p className="text-base-content text-sm mt-1 text-center px-2">
           {about || "No description available."}
         </p>
-        <div className="mt-3 text-gray-400 text-sm text-center">
+        <div className="mt-3 text-sm text-center">
           <p>
-            Age: <span className="font-medium text-white">{age || "N/A"}</span>
+            Age: <span className="font-medium">{age || "N/A"}</span>
           </p>
           <p>
             Gender:{" "}
-            <span className="font-medium text-white capitalize">
-              {gender || "N/A"}
-            </span>
+            <span className="font-medium capitalize">{gender || "N/A"}</span>
           </p>
         </div>
       </div>
@@ -130,14 +128,14 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
       {isRequest === 1 && (
         <div className="flex justify-center gap-4 px-6 pb-4">
           <button
-            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+            className="btn btn-success"
             onClick={() => reviewRequest("accepted", userId)}
             disabled={loading}
           >
             Accept
           </button>
           <button
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+            className="btn btn-error"
             onClick={() => reviewRequest("rejected", userId)}
             disabled={loading}
           >
@@ -148,7 +146,7 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
       {isRequest === 2 && (
         <div className="flex justify-center gap-4 px-6 pb-4">
           <button
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+            className="btn btn-error"
             onClick={() => {
               if (
                 window.confirm("Are you sure you want to remove this request?")
