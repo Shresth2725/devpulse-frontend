@@ -8,6 +8,7 @@ import { resetConnections } from "../../utilis/connectionsSlice";
 import { resetRequests } from "../../utilis/requestsSlice";
 import { resetUserRequest } from "../../utilis/userRequestSlice";
 import { resetNotification } from "../../utilis/notificationSlice";
+import { resetNotificationHistory } from "../../utilis/notificationHistorySlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.User);
@@ -30,6 +31,7 @@ const Navbar = () => {
       dispatch(resetRequests());
       dispatch(resetUserRequest());
       dispatch(resetNotification());
+      dispatch(resetNotificationHistory());
       return navigate("/login");
     } catch (err) {
       console.error(err);

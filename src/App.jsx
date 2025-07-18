@@ -17,6 +17,7 @@ import Modes from "./components/setting/Modes";
 import ResetPassword from "./components/setting/ResetPassword";
 import DeleteAccount from "./components/setting/DeleteAccount";
 import About from "./components/setting/About";
+import NotificationHistory from "./components/notification/notificationHistory";
 
 const App = () => {
   return (
@@ -31,6 +32,10 @@ const App = () => {
             <Route path="requests" element={<Requests />} />
             <Route path="userRequests" element={<UserRequest />} />
             <Route path="notification" element={<Notification />} />
+            <Route
+              path="notificationHistory"
+              element={<NotificationHistory />}
+            />
 
             {/* Settings with nested routes */}
             <Route path="settings" element={<Setting />}>

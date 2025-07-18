@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { baseUrl } from "../../utilis/constant";
 import axios from "axios";
 
-const Notification = ({ notification }) => {
+const Notification = ({ notification, isHistory }) => {
   const { message = "No message", createdAt, fromUserId, _id } = notification;
 
   const seenMessage = async () => {
@@ -18,7 +18,7 @@ const Notification = ({ notification }) => {
   };
 
   useEffect(() => {
-    seenMessage();
+    if (!isHistory) seenMessage();
   }, []);
 
   if (!notification) return null;
