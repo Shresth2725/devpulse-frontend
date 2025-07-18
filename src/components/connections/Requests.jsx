@@ -26,7 +26,15 @@ const Requests = () => {
     fetchRequests();
   }, []);
 
-  if (!requests || requests.length === 0) {
+  if (!requests) {
+    return (
+      <div className="flex justify-center items-center h-screen text-xl text-base-content bg-base-100">
+        Loading...
+      </div>
+    );
+  }
+
+  if (requests.length === 0) {
     return (
       <div className="flex justify-center items-center h-screen text-xl text-base-content bg-base-100">
         No Request Found

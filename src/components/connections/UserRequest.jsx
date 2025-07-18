@@ -24,7 +24,15 @@ const UserRequest = () => {
     fetchUserRequest();
   }, []);
 
-  if (!userRequests || userRequests.length === 0) {
+  if (!userRequests) {
+    return (
+      <div className="flex justify-center items-center h-screen text-xl text-base-content bg-base-100">
+        Loading...
+      </div>
+    );
+  }
+
+  if (userRequests.length === 0) {
     return (
       <div className="flex justify-center items-center h-screen text-xl text-base-content bg-base-100">
         No Sent Requests Found
