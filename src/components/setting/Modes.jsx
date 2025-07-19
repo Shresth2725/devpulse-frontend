@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 const Modes = () => {
-  const [theme, setTheme] = useState("dark");
+  const mode = document.documentElement.getAttribute("data-theme");
+  const [theme, setTheme] = useState(mode);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
