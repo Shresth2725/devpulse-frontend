@@ -10,8 +10,8 @@ const Feed = () => {
   const userFeed = useSelector((store) => store.Feed);
 
   const getFeed = async () => {
+    if (userFeed) return;
     try {
-      if (userFeed) return;
       const res = await axios.get(baseUrl + "/feed", { withCredentials: true });
       dispatch(addFeed(res.data.data));
     } catch (err) {
