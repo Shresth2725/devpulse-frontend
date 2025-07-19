@@ -3,11 +3,12 @@ import React from "react";
 import { baseUrl } from "../../utilis/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFeed } from "../../utilis/feedSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FeedCard = ({ user }) => {
   const { photoUrl, firstName, lastName, about, _id } = user;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loggedInUser = useSelector((store) => store.User);
 
   const handleSendRequest = async (status, _id) => {
@@ -31,6 +32,7 @@ const FeedCard = ({ user }) => {
       }
     } catch (err) {
       console.error("Error occurred:", err.response?.data || err.message);
+      navigate("error");
     }
   };
 

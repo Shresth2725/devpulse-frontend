@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { baseUrl } from "../../utilis/constant";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,7 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
     _id: userId,
   } = user;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loggedInUser = useSelector((store) => store.User);
   let what;
   if (isRequest === 3) what = 2;
@@ -62,6 +63,7 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
       );
     } catch (err) {
       console.error(err.message);
+      navigate("error");
     } finally {
       setLoading(false);
     }
@@ -78,6 +80,7 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
       dispatch(removeUserRequest(requestId));
     } catch (err) {
       console.error(err.message);
+      navigate("error");
     } finally {
       setLoading(false);
     }

@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { baseUrl } from "../../utilis/constant";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Notification = ({ notification, isHistory }) => {
   const { message = "No message", createdAt, fromUserId, _id } = notification;
+  const navigate = useNavigate();
 
   const seenMessage = async () => {
     try {
@@ -14,6 +16,7 @@ const Notification = ({ notification, isHistory }) => {
       );
     } catch (err) {
       console.error(err.message);
+      navigate("error");
     }
   };
 

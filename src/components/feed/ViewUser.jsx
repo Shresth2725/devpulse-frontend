@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../../utilis/constant";
 import { removeFeed } from "../../utilis/feedSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,7 @@ const ViewUser = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const loggedInUser = useSelector((store) => store.User);
+  const navigate = useNavigate();
 
   const getUser = async () => {
     try {
@@ -116,6 +117,7 @@ const ViewUser = () => {
     } catch (err) {
       console.error(err.message);
       setError("Failed to remove request.");
+      navigate("error");
     } finally {
       setLoading(false);
     }

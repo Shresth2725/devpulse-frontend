@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import appStore from "./utilis/appStore";
-
 import Body from "./components/common/Body";
 import Login from "./components/auth/Login";
 import Profile from "./components/profile/Profile";
@@ -11,13 +10,13 @@ import Requests from "./components/connections/Requests";
 import UserRequest from "./components/connections/UserRequest";
 import Notification from "./components/notification/Notification";
 import Setting from "./components/setting/Setting";
-
 import Modes from "./components/setting/Modes";
 import ResetPassword from "./components/setting/ResetPassword";
 import DeleteAccount from "./components/setting/DeleteAccount";
 import About from "./components/setting/About";
 import NotificationHistory from "./components/notification/notificationHistory";
 import ViewUser from "./components/feed/ViewUser";
+import Error from "./components/common/Error";
 
 const App = () => {
   return (
@@ -32,6 +31,7 @@ const App = () => {
             <Route path="requests" element={<Requests />} />
             <Route path="userRequests" element={<UserRequest />} />
             <Route path="notification" element={<Notification />} />
+            <Route path="error" element={<Error />} />
             <Route
               path="notificationHistory"
               element={<NotificationHistory />}

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { baseUrl } from "../../utilis/constant";
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -8,6 +9,7 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const handlePasswordChange = async () => {
     setError("");
@@ -39,6 +41,7 @@ const ResetPassword = () => {
     } catch (err) {
       console.error(err);
       setError(err.response.data);
+      navigate("error");
     }
   };
 

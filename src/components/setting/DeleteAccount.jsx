@@ -22,6 +22,7 @@ const DeleteAccount = () => {
       setMessage(
         "Error deleting account: " + (err.response?.data || err.message)
       );
+      navigate("error");
     }
   };
 

@@ -4,10 +4,12 @@ import { baseUrl } from "../../utilis/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../../utilis/feedSlice";
 import FeedCard from "./FeedCard";
+import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
   const dispatch = useDispatch();
   const userFeed = useSelector((store) => store.Feed);
+  const navigate = useNavigate();
 
   const getFeed = async () => {
     if (userFeed) return;
@@ -16,6 +18,7 @@ const Feed = () => {
       dispatch(addFeed(res.data.data));
     } catch (err) {
       console.error(err);
+      navigate("error");
     }
   };
 

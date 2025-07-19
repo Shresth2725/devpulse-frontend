@@ -4,10 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { baseUrl } from "../../utilis/constant";
 import { addUser } from "../../utilis/userSlice";
 import FeedCard from "../feed/FeedCard";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
   const user = useSelector((store) => store.User?.data || store.User);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -61,6 +63,7 @@ const EditProfile = () => {
       setMessage("✅ Profile updated successfully!");
     } catch (err) {
       setMessage("❌ Failed to update profile: " + err.message);
+      navigate("error");
     } finally {
       setLoading(false);
     }

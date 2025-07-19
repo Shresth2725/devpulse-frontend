@@ -72,6 +72,7 @@ const Login = () => {
         err.response?.data ||
         "Something went wrong";
       setError(errorMsg);
+      navigate("error");
     } finally {
       setLoading(false);
     }
@@ -104,6 +105,7 @@ const Login = () => {
         err.response?.data ||
         "Something went wrong";
       setError(errorMsg);
+      navigate("error");
     } finally {
       setLoading(false);
     }

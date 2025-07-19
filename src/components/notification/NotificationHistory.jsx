@@ -4,10 +4,12 @@ import { baseUrl } from "../../utilis/constant";
 import { useDispatch, useSelector } from "react-redux";
 import NotificationCard from "./NotificationCard";
 import { setNotificationHistory } from "../../utilis/notificationHistorySlice";
+import { useNavigate } from "react-router-dom";
 
 const NotificationHistory = () => {
   const historyNotification = useSelector((store) => store.NotificationHistory);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const fetchHistoryNotification = async () => {
     if (historyNotification.length > 0) return;
@@ -18,6 +20,7 @@ const NotificationHistory = () => {
       dispatch(setNotificationHistory(res.data.data));
     } catch (err) {
       console.error(err.message);
+      navigate("error");
     }
   };
 

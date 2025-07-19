@@ -35,6 +35,7 @@ const Body = () => {
 
       dispatch(setNotification(res.data.data));
     } catch (err) {
+      navigate("error");
       console.error(err.message);
     }
   };

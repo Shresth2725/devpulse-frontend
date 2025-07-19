@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { baseUrl } from "../../utilis/constant";
 import { setConnections } from "../../utilis/connectionsSlice";
 import ProfileCard from "./ProfileCard";
+import { useNavigate } from "react-router-dom";
 
 const Connections = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const connections = useSelector((store) => {
     const state = store.Connections;
@@ -22,6 +24,7 @@ const Connections = () => {
       dispatch(setConnections(res.data.data));
     } catch (err) {
       console.error("Error fetching connections:", err.message);
+      navigate("error");
     }
   };
 
