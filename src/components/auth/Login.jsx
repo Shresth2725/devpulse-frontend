@@ -13,7 +13,7 @@ const Login = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("shresth@gmail.com");
-  const [password, setPassword] = useState("Shresth@1234");
+  const [password, setPassword] = useState("Shresth@12345");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
