@@ -52,6 +52,25 @@ const About = () => {
                 </div>
                 <div className="badge badge-info ml-2 p-3">MERN Stack</div>
               </div>
+
+              <div className="mt-6 flex gap-4">
+                <a
+                  href="https://www.linkedin.com/in/shresth2725"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline btn-primary"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://github.com/Shresth2725"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline btn-base"
+                >
+                  GitHub
+                </a>
+              </div>
             </div>
           </div>
         </div>
