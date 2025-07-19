@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { baseUrl } from "../../utilis/constant";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +18,10 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
   } = user;
   const dispatch = useDispatch();
   const loggedInUser = useSelector((store) => store.User);
+  let what;
+  if (isRequest === 3) what = 2;
+  if (isRequest === 1) what = 3;
+  if (isRequest === 2) what = 4;
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -101,28 +106,30 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
       )}
 
       {/* CARD BODY */}
-      <div className="flex flex-col items-center p-6">
-        <img
-          src={photoUrl || "/default-user.png"}
-          alt={`${firstName} ${lastName}`}
-          className="w-24 h-24 rounded-full object-cover border-4 border-purple-500 shadow-md"
-        />
-        <h2 className="mt-4 text-xl font-semibold text-center">
-          {firstName} {lastName}
-        </h2>
-        <p className="text-base-content text-sm mt-1 text-center px-2">
-          {about || "No description available."}
-        </p>
-        <div className="mt-3 text-sm text-center">
-          <p>
-            Age: <span className="font-medium">{age || "N/A"}</span>
+      <Link to={`/viewUser/${userId}/${what}/${requestId || 0}`}>
+        <div className="flex flex-col items-center p-6">
+          <img
+            src={photoUrl || "/default-user.png"}
+            alt={`${firstName} ${lastName}`}
+            className="w-24 h-24 rounded-full object-cover border-4 border-purple-500 shadow-md"
+          />
+          <h2 className="mt-4 text-xl font-semibold text-center">
+            {firstName} {lastName}
+          </h2>
+          <p className="text-base-content text-sm mt-1 text-center px-2">
+            {about || "No description available."}
           </p>
-          <p>
-            Gender:{" "}
-            <span className="font-medium capitalize">{gender || "N/A"}</span>
-          </p>
+          <div className="mt-3 text-sm text-center">
+            <p>
+              Age: <span className="font-medium">{age || "N/A"}</span>
+            </p>
+            <p>
+              Gender:{" "}
+              <span className="font-medium capitalize">{gender || "N/A"}</span>
+            </p>
+          </div>
         </div>
-      </div>
+      </Link>
 
       {/* ACTION BUTTONS */}
       {isRequest === 1 && (

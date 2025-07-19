@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import appStore from "./utilis/appStore";
@@ -18,6 +17,7 @@ import ResetPassword from "./components/setting/ResetPassword";
 import DeleteAccount from "./components/setting/DeleteAccount";
 import About from "./components/setting/About";
 import NotificationHistory from "./components/notification/notificationHistory";
+import ViewUser from "./components/feed/ViewUser";
 
 const App = () => {
   return (
@@ -35,6 +35,10 @@ const App = () => {
             <Route
               path="notificationHistory"
               element={<NotificationHistory />}
+            />
+            <Route
+              path="viewUser/:id/:what/:requestId"
+              element={<ViewUser />}
             />
 
             {/* Settings with nested routes */}

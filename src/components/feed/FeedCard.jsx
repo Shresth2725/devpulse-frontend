@@ -3,19 +3,15 @@ import React from "react";
 import { baseUrl } from "../../utilis/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFeed } from "../../utilis/feedSlice";
+import { Link } from "react-router-dom";
 
 const FeedCard = ({ user }) => {
   const { photoUrl, firstName, lastName, about, _id } = user;
   const dispatch = useDispatch();
   const loggedInUser = useSelector((store) => store.User);
-  // console.log(loggedInUser);
 
   const handleSendRequest = async (status, _id) => {
     try {
-      // console.log(
-      //   "Sending request to:",
-      //   baseUrl + "/request/send/" + status + "/" + _id
-      // );
       await axios.post(
         baseUrl + "/request/send/" + status + "/" + _id,
         {},
@@ -24,7 +20,6 @@ const FeedCard = ({ user }) => {
       dispatch(removeFeed(_id));
 
       if (status === "interested") {
-        // console.log("Sending notification...");
         await axios.post(
           baseUrl + "/notification/send",
           {
@@ -40,22 +35,26 @@ const FeedCard = ({ user }) => {
   };
 
   return (
-    <div className="h-full ">
+    <div className="h-full">
       <div className="card bg-base-300 h-full shadow-xl">
         <figure className="p-6">
-          <img
-            src={
-              photoUrl ||
-              "https://sclpa.com/wp-content/uploads/2022/10/dummy-img-1.jpg"
-            }
-            alt={firstName + " Picture"}
-            className="rounded-xl object-cover max-h-60"
-          />
+          <Link to={`/viewUser/${_id}/1/0`}>
+            <img
+              src={
+                photoUrl ||
+                "https://sclpa.com/wp-content/uploads/2022/10/dummy-img-1.jpg"
+              }
+              alt={firstName + " Picture"}
+              className="rounded-xl object-cover max-h-60"
+            />
+          </Link>
         </figure>
         <div className="card-body items-center text-center">
-          <h2 className="card-title text-xl font-semibold">
-            {firstName} {lastName}
-          </h2>
+          <Link to={`/viewUser/${_id}`}>
+            <h2 className="card-title text-xl font-semibold">
+              {firstName} {lastName}
+            </h2>
+          </Link>
           <p className="text-sm">{about}</p>
           <div className="card-actions justify-center mt-4">
             <button
