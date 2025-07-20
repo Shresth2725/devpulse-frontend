@@ -24,7 +24,7 @@ const Connections = () => {
       dispatch(setConnections(res.data.data));
     } catch (err) {
       console.error("Error fetching connections:", err.message);
-      navigate("error");
+      navigate("/error");
     }
   };
 

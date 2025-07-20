@@ -22,7 +22,7 @@ const Requests = () => {
         dispatch(setRequests(response.data.data));
       } catch (error) {
         console.error("Failed to fetch requests:", error.message);
-        navigate("error");
+        navigate("/error");
       }
     };
 

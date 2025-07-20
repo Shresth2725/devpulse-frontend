@@ -32,7 +32,7 @@ const FeedCard = ({ user }) => {
       }
     } catch (err) {
       console.error("Error occurred:", err.response?.data || err.message);
-      navigate("error");
+      navigate("/error");
     }
   };
 

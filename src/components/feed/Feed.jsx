@@ -18,7 +18,7 @@ const Feed = () => {
       dispatch(addFeed(res.data.data));
     } catch (err) {
       console.error(err);
-      navigate("error");
+      navigate("/error");
     }
   };
 

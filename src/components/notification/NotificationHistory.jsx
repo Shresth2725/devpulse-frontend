@@ -20,7 +20,7 @@ const NotificationHistory = () => {
       dispatch(setNotificationHistory(res.data.data));
     } catch (err) {
       console.error(err.message);
-      navigate("error");
+      navigate("/error");
     }
   };
 

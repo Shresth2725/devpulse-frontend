@@ -19,7 +19,7 @@ const UserRequest = () => {
       dispatch(setUserRequest(res.data.data));
     } catch (err) {
       console.error("Error fetching user requests:", err.message);
-      navigate("error");
+      navigate("/error");
     }
   };
 

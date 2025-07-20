@@ -16,7 +16,7 @@ const Notification = ({ notification, isHistory }) => {
       );
     } catch (err) {
       console.error(err.message);
-      navigate("error");
+      navigate("/error");
     }
   };
 

@@ -26,6 +26,7 @@ const ViewUser = () => {
     } catch (err) {
       console.error("Fetch error:", err.message);
       setError("User not found or server error.");
+      navigate("/error");
     }
   };
 
@@ -70,6 +71,7 @@ const ViewUser = () => {
     } catch (err) {
       console.error("Error occurred:", err.response?.data || err.message);
       setError("Something went wrong while sending the request.");
+      navigate("/error");
     } finally {
       setLoading(false);
     }

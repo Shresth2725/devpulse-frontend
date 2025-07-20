@@ -105,7 +105,7 @@ const Login = () => {
         err.response?.data ||
         "Something went wrong";
       setError(errorMsg);
-      navigate("error");
+      navigate("/error");
     } finally {
       setLoading(false);
     }
