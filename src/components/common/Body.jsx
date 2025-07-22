@@ -43,7 +43,7 @@ const Body = () => {
       dispatch(setNotification(res.data.data));
     } catch (err) {
       console.error("Notification fetch failed:", err.message);
-      navigate("/error");
+      // navigate("/error");
     }
   };
 
