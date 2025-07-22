@@ -14,7 +14,7 @@ import Modes from "./components/setting/Modes";
 import ResetPassword from "./components/setting/ResetPassword";
 import DeleteAccount from "./components/setting/DeleteAccount";
 import About from "./components/setting/About";
-import NotificationHistory from "./components/notification/notificationHistory";
+import NotificationHistory from "./components/notification/NotificationHistory";
 import ViewUser from "./components/feed/ViewUser";
 import Error from "./components/common/Error";
 
