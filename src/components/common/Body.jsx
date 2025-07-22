@@ -15,14 +15,23 @@ const Body = () => {
 
   const fetchUser = async () => {
     if (userData) return;
+
     try {
-      const user = await axios.get(baseUrl + "/profile/view", {
+      const res = await axios.get(baseUrl + "/profile/view", {
         withCredentials: true,
       });
-
-      dispatch(addUser(user.data));
+      dispatch(addUser(res.data));
     } catch (err) {
-      if (err.status === 400) navigate("/login");
+      const status = err.response?.status;
+      const message = err.response?.data?.message || "";
+
+      console.warn("User fetch failed:", status, message);
+
+      // If token is invalid or missing, redirect to login
+      if (status === 400 && message.toLowerCase().includes("token")) {
+        dispatch(addUser(null));
+        navigate("/login");
+      }
     }
   };
 
@@ -31,23 +40,20 @@ const Body = () => {
       const res = await axios.get(baseUrl + "/notification/receive", {
         withCredentials: true,
       });
-      // console.log(res.data);
-
       dispatch(setNotification(res.data.data));
     } catch (err) {
-      // navigate("/error");
-      console.error(err.message);
+      console.error("Notification fetch failed:", err.message);
+      navigate("/error");
     }
   };
 
   useEffect(() => {
-    if (userData) fetchNotification();
-  });
+    fetchUser();
+  }, []);
 
   useEffect(() => {
-    fetchUser();
     if (userData) fetchNotification();
-  }, []);
+  }, [userData]);
 
   return (
     <div>
