@@ -63,7 +63,7 @@ const EditProfile = () => {
       setMessage("✅ Profile updated successfully!");
     } catch (err) {
       setMessage("❌ Failed to update profile: " + err.message);
-      navigate("/error");
+      // navigate("/error");
     } finally {
       setLoading(false);
     }

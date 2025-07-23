@@ -63,7 +63,7 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
       );
     } catch (err) {
       console.error(err.message);
-      navigate("/error");
+      // navigate("/error");
     } finally {
       setLoading(false);
     }

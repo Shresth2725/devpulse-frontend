@@ -4,12 +4,12 @@ import { baseUrl } from "../../utilis/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserRequest } from "../../utilis/userRequestSlice";
 import ProfileCard from "./ProfileCard";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const UserRequest = () => {
   const dispatch = useDispatch();
   const userRequests = useSelector((store) => store.UserRequest);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const fetchUserRequest = async () => {
     try {
@@ -19,7 +19,7 @@ const UserRequest = () => {
       dispatch(setUserRequest(res.data.data));
     } catch (err) {
       console.error("Error fetching user requests:", err.message);
-      navigate("/error");
+      // navigate("/error");
     }
   };
 

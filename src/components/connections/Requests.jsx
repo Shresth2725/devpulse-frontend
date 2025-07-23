@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { baseUrl } from "../../utilis/constant";
 import { setRequests } from "../../utilis/requestsSlice";
 import ProfileCard from "./ProfileCard";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Requests = () => {
   const dispatch = useDispatch();
   const requests = useSelector((store) => store?.Requests);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRequests = async () => {
@@ -22,7 +22,7 @@ const Requests = () => {
         dispatch(setRequests(response.data.data));
       } catch (error) {
         console.error("Failed to fetch requests:", error.message);
-        navigate("/error");
+        // navigate("/error");
       }
     };
 
