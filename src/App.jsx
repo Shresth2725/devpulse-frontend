@@ -17,6 +17,9 @@ import About from "./components/setting/About";
 import NotificationHistory from "./components/notification/NotificationHistory";
 import ViewUser from "./components/feed/ViewUser";
 import Error from "./components/common/Error";
+import Chat from "./components/chat/Chat";
+import ConnectionsChat from "./components/chat/ConnectionChat";
+import ChatLayout from "./components/chat/ChatLayout";
 
 const App = () => {
   return (
@@ -40,6 +43,19 @@ const App = () => {
               path="viewUser/:id/:what/:requestId"
               element={<ViewUser />}
             />
+
+            {/* Chat */}
+            <Route path="chat" element={<ChatLayout />}>
+              <Route
+                index
+                element={
+                  <div className="flex justify-center items-center h-full w-full">
+                    Select a user to chat
+                  </div>
+                }
+              />
+              <Route path=":targetUserId/:targetFirstName" element={<Chat />} />
+            </Route>
 
             {/* Settings with nested routes */}
             <Route path="settings" element={<Setting />}>

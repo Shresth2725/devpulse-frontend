@@ -39,12 +39,17 @@ const Navbar = () => {
     }
   };
 
+  const closeDrawer = () => {
+    const drawerCheckbox = document.getElementById("my-drawer");
+    if (drawerCheckbox) drawerCheckbox.checked = false;
+  };
+
   return (
     <div>
-      <div className="navbar bg-base-300 shadow-sm ">
+      <div className="navbar bg-base-300 shadow-sm">
         <div className="navbar-start">
           {user && (
-            <div className="drawer z-10">
+            <div className="drawer z-20">
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
                 <label
@@ -81,6 +86,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         to="/connections"
+                        onClick={closeDrawer}
                         className="flex items-center gap-3 hover:bg-base-300 rounded-lg p-2"
                       >
                         <svg
@@ -103,6 +109,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         to="/requests"
+                        onClick={closeDrawer}
                         className="flex items-center gap-3 hover:bg-base-300 rounded-lg p-2"
                       >
                         <svg
@@ -125,6 +132,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         to="/userRequests"
+                        onClick={closeDrawer}
                         className="flex items-center gap-3 hover:bg-base-300 rounded-lg p-2"
                       >
                         <svg
@@ -144,6 +152,29 @@ const Navbar = () => {
                         <span>Your Requests</span>
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        to="/chat"
+                        onClick={closeDrawer}
+                        className="flex items-center gap-3 hover:bg-base-300 rounded-lg p-2"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.77 9.77 0 01-4-.84L3 20l1.59-3.17A7.978 7.978 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                          />
+                        </svg>
+                        <span>Chat</span>
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -154,7 +185,6 @@ const Navbar = () => {
         {user ? (
           <div className="navbar-center">
             <Link to="/" className="btn btn-ghost text-xl">
-              {/* <img src="Logo.png" alt="logo" className="w-100 h-30" /> */}
               DevPulse
             </Link>
           </div>

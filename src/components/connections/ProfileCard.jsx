@@ -170,6 +170,18 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
           </button>
         </div>
       )}
+      {isRequest === 3 && (
+        <div className="flex justify-center gap-4 px-6 pb-4">
+          <Link to={`/chat/${userId}`}>
+            <button
+              className="btn btn-error bg-primary border-primary"
+              disabled={loading}
+            >
+              Chat
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
