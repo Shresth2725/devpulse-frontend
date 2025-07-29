@@ -125,7 +125,7 @@ const Chat = () => {
       </div>
 
       {/* Input Area */}
-      <div className="p-4 bg-base-200 flex items-center gap-2 mb-15 z-20">
+      <div className="p-4 bg-base-200 flex items-center gap-2 z-20">
         <input
           type="text"
           className="input input-bordered w-full"
