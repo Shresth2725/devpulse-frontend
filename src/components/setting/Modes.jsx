@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMode } from "../../utilis/settingSlice"; // Adjust path
 
 const Modes = () => {
-  const mode = document.documentElement.getAttribute("data-theme");
-  const [theme, setTheme] = useState(mode);
+  const theme = useSelector((state) => state.Setting);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
+    if (theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
   }, [theme]);
-
-  const toggleLightDark = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
 
   return (
     <div className="p-4 min-h-screen bg-base-100 text-base-content">
@@ -22,7 +22,7 @@ const Modes = () => {
           type="checkbox"
           className="toggle toggle-lg"
           checked={theme === "dark"}
-          onChange={toggleLightDark}
+          onChange={() => dispatch(toggleMode())}
         />
         <span className="font-medium">Dark</span>
       </div>

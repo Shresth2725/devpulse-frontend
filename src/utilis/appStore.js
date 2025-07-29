@@ -6,6 +6,7 @@ import requestReducer from "./requestsSlice";
 import userRequestReducer from "./userRequestSlice";
 import notificationReducer from "./notificationSlice";
 import notificationHistoryReducer from "./notificationHistorySlice";
+import settingReducer from "./settingSlice";
 
 const appStore = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const appStore = configureStore({
     UserRequest: userRequestReducer,
     Notifications: notificationReducer,
     NotificationHistory: notificationHistoryReducer,
+    Setting: settingReducer,
   },
 });
 
