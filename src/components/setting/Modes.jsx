@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMode } from "../../utilis/settingSlice"; // Adjust path
+import { toggleMode } from "../../utilis/settingSlice";
 
 const Modes = () => {
   const theme = useSelector((state) => state.Setting);
