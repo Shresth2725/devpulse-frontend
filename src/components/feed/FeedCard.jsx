@@ -8,6 +8,8 @@ import { Verified, VerifiedIcon } from "lucide-react";
 
 const FeedCard = ({ user }) => {
   const { photoUrl, firstName, lastName, about, _id, isPremium } = user;
+  // console.log(id);
+
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   const loggedInUser = useSelector((store) => store.User);

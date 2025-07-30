@@ -23,6 +23,7 @@ const EditProfile = () => {
   const [skills, setSkills] = useState([]);
   const [gender, setGender] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
+  const [id, setId] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -37,6 +38,7 @@ const EditProfile = () => {
       setSkills(user.skills || []);
       setGender(user.gender || "");
       setPhotoUrl(user.photoUrl || "");
+      setId(user._id || "");
       setIsInitialized(true);
     }
   }, [user]);
@@ -212,6 +214,7 @@ const EditProfile = () => {
             about,
             skills,
             isPremium,
+            _id: id,
           }}
         />
       </div>
