@@ -1,11 +1,15 @@
 import axios from "axios";
 import { baseUrl } from "../../utilis/constant";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Premium = () => {
-  const isPremium = useSelector((store) => store.User.isPremium);
+  var isPremium = useSelector((store) => store.User.isPremium);
   const [isUserPremium, setIsUserPremium] = useState(isPremium);
+
+  useEffect(() => {
+    verifyPremiumUser();
+  }, []);
 
   const handleBuyClick = async (plan) => {
     const order = await axios.post(
