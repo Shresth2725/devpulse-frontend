@@ -1,8 +1,12 @@
 import axios from "axios";
 import { baseUrl } from "../../utilis/constant";
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Premium = () => {
+  const isPremium = useSelector((store) => store.User.isPremium);
+  const [isUserPremium, setIsUserPremium] = useState(isPremium);
+
   const handleBuyClick = async (plan) => {
     const order = await axios.post(
       baseUrl + "/payment/create",
@@ -13,13 +17,12 @@ const Premium = () => {
     const { amount, currency, orderId, notes } = order.data.data;
     const { firstName, lastName } = notes;
 
-    // Open the dialogue box
     const options = {
       key: order.data.keyId,
-      amount: amount,
-      currency: currency,
+      amount,
+      currency,
       name: "DevPulse",
-      description: "Test Transaction",
+      description: "Membership Purchase",
       order_id: orderId,
       prefill: {
         name: `${firstName} ${lastName}`,
@@ -27,60 +30,84 @@ const Premium = () => {
         contact: "9999999999",
       },
       theme: {
-        color: "#F37254",
+        color: "#2563eb",
       },
+      handler: verifyPremiumUser,
     };
 
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
 
+  const verifyPremiumUser = async () => {
+    const res = await axios.get(baseUrl + "/payment/status", {
+      withCredentials: true,
+    });
+    if (res.data.isPremium) setIsUserPremium(true);
+  };
+
+  if (isUserPremium) {
+    return (
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content text-center">
+          <div>
+            <h1 className="text-4xl font-bold text-success">
+              You are already a Premium user!
+            </h1>
+            <p className="mt-2 text-lg">Enjoy all the exclusive features 🎉</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="m-10">
-      <h1 className="text-3xl font-bold text-center mb-10">
+    <div className="min-h-screen bg-base-100 py-10">
+      <h1 className="text-4xl font-bold text-center mb-12">
         Premium Membership
       </h1>
-      <div className="flex flex-col lg:flex-row justify-center items-center gap-10">
+      <div className="flex flex-col lg:flex-row justify-center items-center gap-10 px-4">
         {/* Silver Membership */}
-        <div className="card w-96 bg-base-200 shadow-xl">
-          <div className="card-body items-center text-center">
-            <h2 className="card-title text-slate-600">Silver Membership</h2>
-            <ul className="text-left list-disc list-inside">
+        <div className="card w-96 bg-base-200 shadow-xl border hover:scale-105 transition">
+          <div className="card-body text-center">
+            <h2 className="card-title text-slate-600 justify-center">
+              Silver Membership
+            </h2>
+            <p className="text-sm text-slate-500 mb-2">Valid for 3 Months</p>
+            <ul className="text-left list-disc list-inside text-base-content">
               <li>Chat with other people</li>
-              <li>100 connection requests per day</li>
-              <li>Blue Tick</li>
-              <li>3 months validity</li>
+              <li>100 connection requests/day</li>
+              <li>Blue Tick Badge</li>
             </ul>
-            <div className="card-actions mt-4">
+            <div className="mt-6 w-full">
               <button
                 onClick={() => handleBuyClick("silver")}
-                className="btn btn-primary"
+                className="btn btn-primary w-full"
               >
-                Buy Silver
+                Buy Silver – ₹299
               </button>
             </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="divider lg:divider-horizontal text-xl">OR</div>
-
         {/* Gold Membership */}
-        <div className="card w-96 bg-base-200 shadow-xl">
-          <div className="card-body items-center text-center">
-            <h2 className="card-title text-yellow-600">Gold Membership</h2>
-            <ul className="text-left list-disc list-inside">
+        <div className="card w-96 bg-base-200 shadow-xl border-yellow-400 hover:scale-105 transition">
+          <div className="card-body text-center">
+            <h2 className="card-title text-yellow-600 justify-center">
+              Gold Membership
+            </h2>
+            <p className="text-sm text-yellow-500 mb-2">Valid for 6 Months</p>
+            <ul className="text-left list-disc list-inside text-base-content">
               <li>Chat with other people</li>
-              <li>200 connection requests per day</li>
-              <li>Gold Tick</li>
-              <li>6 months validity</li>
+              <li>200 connection requests/day</li>
+              <li>Gold Tick Badge</li>
             </ul>
-            <div className="card-actions mt-4">
+            <div className="mt-6 w-full">
               <button
                 onClick={() => handleBuyClick("gold")}
-                className="btn btn-warning"
+                className="btn btn-warning w-full"
               >
-                Buy Gold
+                Buy Gold – ₹499
               </button>
             </div>
           </div>
