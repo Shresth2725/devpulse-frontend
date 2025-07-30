@@ -7,26 +7,35 @@ import { useSelector } from "react-redux";
 const ChatLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const user = useSelector((store) => store.User);
-  const { isPremium } = user || false;
 
-  return isPremium ? (
-    <div className="relative h-screen w-screen bg-base-100">
-      <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-center px-4">
-        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-          You are not a Premium user
-        </h1>
-        <p className="text-lg text-gray-200 mb-6">
-          Subscribe to access chat features and connect with others.
-        </p>
-        <Link
-          to="/premium"
-          className="btn btn-primary px-6 py-2 text-white text-lg font-semibold shadow-lg hover:scale-105 transition-transform"
-        >
-          Buy Premium
-        </Link>
+  // Access isPremium from user.data
+  const isPremium = user?.data?.isPremium;
+  console.log("isPremium:", isPremium);
+
+  // Show Buy Premium screen if not premium
+  if (!isPremium) {
+    return (
+      <div className="relative h-screen w-screen bg-base-100">
+        <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-center px-4">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            You are not a Premium user
+          </h1>
+          <p className="text-lg text-gray-200 mb-6">
+            Subscribe to access chat features and connect with others.
+          </p>
+          <Link
+            to="/premium"
+            className="btn btn-primary px-6 py-2 text-white text-lg font-semibold shadow-lg hover:scale-105 transition-transform"
+          >
+            Buy Premium
+          </Link>
+        </div>
       </div>
-    </div>
-  ) : (
+    );
+  }
+
+  // Premium chat layout
+  return (
     <div className="flex h-screen bg-base-100 text-base-content relative overflow-hidden">
       {/* Sidebar */}
       <div
