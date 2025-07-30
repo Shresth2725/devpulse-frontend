@@ -20,6 +20,7 @@ import Error from "./components/common/Error";
 import Chat from "./components/chat/Chat";
 import ConnectionsChat from "./components/chat/ConnectionChat";
 import ChatLayout from "./components/chat/ChatLayout";
+import Premium from "./components/Premium/Premium";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="userRequests" element={<UserRequest />} />
             <Route path="notification" element={<Notification />} />
             <Route path="error" element={<Error />} />
+            <Route path="premium" element={<Premium />} />
             <Route
               path="notificationHistory"
               element={<NotificationHistory />}

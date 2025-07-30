@@ -90,11 +90,11 @@ const Navbar = () => {
                         className="flex items-center gap-3 hover:bg-base-300 rounded-lg p-2"
                       >
                         <svg
-                          xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 text-primary"
                           fill="none"
-                          viewBox="0 0 24 24"
                           stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
                             strokeLinecap="round"
@@ -113,11 +113,11 @@ const Navbar = () => {
                         className="flex items-center gap-3 hover:bg-base-300 rounded-lg p-2"
                       >
                         <svg
-                          xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 text-primary"
                           fill="none"
-                          viewBox="0 0 24 24"
                           stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
                             strokeLinecap="round"
@@ -136,11 +136,11 @@ const Navbar = () => {
                         className="flex items-center gap-3 hover:bg-base-300 rounded-lg p-2"
                       >
                         <svg
-                          xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 text-primary"
                           fill="none"
-                          viewBox="0 0 24 24"
                           stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
                             strokeLinecap="round"
@@ -159,11 +159,11 @@ const Navbar = () => {
                         className="flex items-center gap-3 hover:bg-base-300 rounded-lg p-2"
                       >
                         <svg
-                          xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 text-primary"
                           fill="none"
-                          viewBox="0 0 24 24"
                           stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
                             strokeLinecap="round"
@@ -173,6 +173,29 @@ const Navbar = () => {
                           />
                         </svg>
                         <span>Chat</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/premium"
+                        onClick={closeDrawer}
+                        className="flex items-center gap-3 hover:bg-base-300 rounded-lg p-2"
+                      >
+                        <svg
+                          className="h-5 w-5 text-primary"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 8c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2zm0 2c-1.657 0-3 1.343-3 3v4h6v-4c0-1.657-1.343-3-3-3z"
+                          />
+                        </svg>
+                        <span>Premium</span>
                       </Link>
                     </li>
                   </ul>
@@ -200,11 +223,11 @@ const Navbar = () => {
               <div className="indicator">
                 <Link to="/notification">
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
                     fill="none"
-                    viewBox="0 0 24 24"
                     stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       strokeLinecap="round"
