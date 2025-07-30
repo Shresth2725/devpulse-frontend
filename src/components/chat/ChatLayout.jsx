@@ -9,7 +9,7 @@ const ChatLayout = () => {
   const user = useSelector((store) => store.User);
   const { isPremium } = user || false;
 
-  return !isPremium ? (
+  return isPremium ? (
     <div className="relative h-screen w-screen bg-base-100">
       <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-center px-4">
         <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
