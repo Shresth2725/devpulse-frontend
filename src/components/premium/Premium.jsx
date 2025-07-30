@@ -80,7 +80,6 @@ const Premium = () => {
             <p className="text-sm text-slate-500 mb-2">Valid for 3 Months</p>
             <ul className="text-left list-disc list-inside text-base-content">
               <li>Chat with other people</li>
-              <li>100 connection requests/day</li>
               <li>Blue Tick Badge</li>
             </ul>
             <div className="mt-6 w-full">
@@ -103,7 +102,6 @@ const Premium = () => {
             <p className="text-sm text-yellow-500 mb-2">Valid for 6 Months</p>
             <ul className="text-left list-disc list-inside text-base-content">
               <li>Chat with other people</li>
-              <li>200 connection requests/day</li>
               <li>Gold Tick Badge</li>
             </ul>
             <div className="mt-6 w-full">
