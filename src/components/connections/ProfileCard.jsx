@@ -5,6 +5,7 @@ import { baseUrl } from "../../utilis/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { removeRequests } from "../../utilis/requestsSlice";
 import { removeUserRequest } from "../../utilis/userRequestSlice";
+import { Verified, VerifiedIcon } from "lucide-react";
 
 const ProfileCard = ({ user, isRequest, requestId }) => {
   const {
@@ -15,6 +16,7 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
     age,
     gender,
     _id: userId,
+    isPremium,
   } = user;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -117,8 +119,12 @@ const ProfileCard = ({ user, isRequest, requestId }) => {
             className="w-24 h-24 rounded-full object-cover border-4 border-purple-500 shadow-md"
           />
           <h2 className="mt-4 text-xl font-semibold text-center">
-            {firstName} {lastName}
+            {firstName} {lastName}{" "}
+            {isPremium && (
+              <VerifiedIcon className="inline-block w-5 h-5 text-blue-500 ml-1" />
+            )}
           </h2>
+
           <p className="text-base-content text-sm mt-1 text-center px-2">
             {about || "No description available."}
           </p>

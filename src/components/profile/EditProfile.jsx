@@ -8,6 +8,11 @@ import FeedCard from "../feed/FeedCard";
 
 const EditProfile = () => {
   const user = useSelector((store) => store.User?.data || store.User);
+  console.log(user);
+
+  var isPremium = user?.isPremium;
+  console.log(isPremium);
+
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
@@ -198,7 +203,16 @@ const EditProfile = () => {
       {/* FeedCard Preview */}
       <div className="w-full lg:flex-1 bg-base-200 rounded-2xl shadow-lg p-6 h-full">
         <FeedCard
-          user={{ firstName, lastName, age, gender, photoUrl, about, skills }}
+          user={{
+            firstName,
+            lastName,
+            age,
+            gender,
+            photoUrl,
+            about,
+            skills,
+            isPremium,
+          }}
         />
       </div>
     </div>

@@ -6,6 +6,7 @@ import { removeFeed } from "../../utilis/feedSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { removeRequests } from "../../utilis/requestsSlice";
 import { removeUserRequest } from "../../utilis/userRequestSlice";
+import { Verified } from "lucide-react";
 
 const ViewUser = () => {
   const { id, what, requestId } = useParams();
@@ -231,12 +232,19 @@ const ViewUser = () => {
             <p>
               <span className="font-semibold">About:</span> {userData.about}
             </p>
+            {userData.isPremium && (
+              <div className="inline-flex items-center gap-2 mt-2">
+                <span className="badge badge-success text-white font-semibold text-sm">
+                  Verified User
+                </span>
+              </div>
+            )}
           </div>
         </div>
       ) : (
         !error && (
-          <div className="flex justify-center items-center h-40">
-            <span className="loading loading-spinner loading-lg text-primary"></span>
+          <div className="w-full md:w-2/3 flex justify-center items-center h-64 mx-auto">
+            <span className="loading loading-spinner loading-xl text-primary scale-125"></span>
           </div>
         )
       )}

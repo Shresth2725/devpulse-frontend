@@ -4,9 +4,10 @@ import { baseUrl } from "../../utilis/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFeed } from "../../utilis/feedSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { Verified, VerifiedIcon } from "lucide-react";
 
 const FeedCard = ({ user }) => {
-  const { photoUrl, firstName, lastName, about, _id } = user;
+  const { photoUrl, firstName, lastName, about, _id, isPremium } = user;
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   const loggedInUser = useSelector((store) => store.User);
@@ -52,9 +53,12 @@ const FeedCard = ({ user }) => {
           </Link>
         </figure>
         <div className="card-body items-center text-center">
-          <Link to={`/viewUser/${_id}`}>
+          <Link to={`/viewUser/${_id}/1/0`}>
             <h2 className="card-title text-xl font-semibold">
-              {firstName} {lastName}
+              {firstName} {lastName}{" "}
+              {isPremium && (
+                <VerifiedIcon className="inline-block w-5 h-5 text-blue-500 ml-1" />
+              )}
             </h2>
           </Link>
           <p className="text-sm">{about}</p>

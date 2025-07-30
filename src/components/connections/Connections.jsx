@@ -32,6 +32,8 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
+  console.log(connections);
+
   if (!connections) {
     return (
       <div className="flex justify-center items-center h-screen text-xl text-base-content bg-base-100">
