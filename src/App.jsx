@@ -20,7 +20,7 @@ import Error from "./components/common/Error";
 import Chat from "./components/chat/Chat";
 import ConnectionsChat from "./components/chat/ConnectionChat";
 import ChatLayout from "./components/chat/ChatLayout";
-import Premium from "./components/Premium/Premium";
+import Premium from "./components/premium/Premium";
 
 const App = () => {
   return (
