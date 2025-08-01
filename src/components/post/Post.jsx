@@ -100,7 +100,7 @@ const Post = () => {
             />
             <input
               type="file"
-              accept="image/*"
+              accept=".png,.jpg,.jpeg,.heic,.heif,image/*"
               className="file-input file-input-bordered w-full"
               onChange={(e) => {
                 const file = e.target.files[0];
@@ -111,6 +111,7 @@ const Post = () => {
                   } else {
                     setUploadError("");
                     setImageFile(file);
+                    console.log("Selected file:", file);
                   }
                 }
               }}
