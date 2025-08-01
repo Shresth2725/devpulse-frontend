@@ -7,6 +7,7 @@ const Post = () => {
   const [posts, setPosts] = useState([]);
   const [message, setMessage] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const [uploadError, setUploadError] = useState("");
 
   const fetchPost = async () => {
     try {
@@ -25,18 +26,26 @@ const Post = () => {
     formData.append("image", imageFile);
 
     try {
-      const res = await axios.post(`${baseUrl}/upload`, formData);
+      const res = await axios.post(`${baseUrl}/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return res.data.url;
     } catch (err) {
       console.error("Image upload failed:", err);
+      setUploadError("Failed to upload image. Please try again.");
       return null;
     }
   };
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
+    if (uploadError) return;
+
     try {
       const imageUrl = await handleImageUpload();
+      if (!imageUrl) return;
 
       await axios.post(
         `${baseUrl}/post/create`,
@@ -46,6 +55,7 @@ const Post = () => {
 
       setMessage("");
       setImageFile(null);
+      setUploadError("");
       document.getElementById("create_post_modal").close();
       fetchPost();
     } catch (error) {
@@ -90,11 +100,25 @@ const Post = () => {
             />
             <input
               type="file"
-              accept=".jpg,.jpeg,.png"
+              accept="image/*"
               className="file-input file-input-bordered w-full"
-              onChange={(e) => setImageFile(e.target.files[0])}
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  if (file.size > 5 * 1024 * 1024) {
+                    setUploadError("Image must be under 5MB.");
+                    setImageFile(null);
+                  } else {
+                    setUploadError("");
+                    setImageFile(file);
+                  }
+                }
+              }}
               required
             />
+            {uploadError && (
+              <div className="text-red-500 text-sm">{uploadError}</div>
+            )}
             <div className="modal-action">
               <button type="submit" className="btn btn-success">
                 Post
