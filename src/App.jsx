@@ -21,6 +21,7 @@ import Chat from "./components/chat/Chat";
 import ConnectionsChat from "./components/chat/ConnectionChat";
 import ChatLayout from "./components/chat/ChatLayout";
 import Premium from "./components/premium/Premium";
+import Post from "./components/post/Post";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="notification" element={<Notification />} />
             <Route path="error" element={<Error />} />
             <Route path="premium" element={<Premium />} />
+            <Route path="post" element={<Post />} />
             <Route
               path="notificationHistory"
               element={<NotificationHistory />}

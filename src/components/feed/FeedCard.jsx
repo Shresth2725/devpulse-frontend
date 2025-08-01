@@ -3,7 +3,7 @@ import React from "react";
 import { baseUrl } from "../../utilis/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFeed } from "../../utilis/feedSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Verified, VerifiedIcon } from "lucide-react";
 
 const FeedCard = ({ user }) => {

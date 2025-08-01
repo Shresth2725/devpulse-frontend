@@ -32,7 +32,7 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
-  console.log(connections);
+  // console.log(connections);
 
   if (!connections) {
     return (

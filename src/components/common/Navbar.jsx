@@ -198,6 +198,29 @@ const Navbar = () => {
                         <span>Premium</span>
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        to="/post"
+                        onClick={closeDrawer}
+                        className="flex items-center gap-3 hover:bg-base-300 rounded-lg p-2"
+                      >
+                        <svg
+                          className="h-5 w-5 text-primary"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M19 21H5a2 2 0 01-2-2V7a2 2 0 012-2h4l2-2h2l2 2h4a2 2 0 012 2v12a2 2 0 01-2 2z"
+                          />
+                        </svg>
+                        <span>Posts</span>
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               </div>

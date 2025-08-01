@@ -8,10 +8,10 @@ import FeedCard from "../feed/FeedCard";
 
 const EditProfile = () => {
   const user = useSelector((store) => store.User?.data || store.User);
-  console.log(user);
+  // console.log(user);
 
   var isPremium = user?.isPremium;
-  console.log(isPremium);
+  // console.log(isPremium);
 
   const dispatch = useDispatch();
   // const navigate = useNavigate();
