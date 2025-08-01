@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { baseUrl } from "../../utilis/constant";
 import PostCard from "./PostCard";
 
@@ -7,7 +7,6 @@ const Post = () => {
   const [posts, setPosts] = useState([]);
   const [message, setMessage] = useState("");
   const [imageFile, setImageFile] = useState(null);
-  const [imgUrl, setImgUrl] = useState(null);
 
   const fetchPost = async () => {
     try {
@@ -20,20 +19,16 @@ const Post = () => {
     }
   };
 
-  const handleImgageUpload = async () => {
+  const handleImageUpload = async () => {
     if (!imageFile) return null;
-
     const formData = new FormData();
     formData.append("image", imageFile);
 
     try {
-      const res = await axios.post(baseUrl + "/upload", formData);
-      // console.log(res.data.url);
-
-      setImgUrl(res.data.url);
+      const res = await axios.post(`${baseUrl}/upload`, formData);
       return res.data.url;
     } catch (err) {
-      console.error("Upload failed:", err);
+      console.error("Image upload failed:", err);
       return null;
     }
   };
@@ -41,14 +36,12 @@ const Post = () => {
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     try {
-      const uploadedUrl = await handleImgageUpload();
+      const imageUrl = await handleImageUpload();
 
       await axios.post(
         `${baseUrl}/post/create`,
-        { message, imageUrl: uploadedUrl },
-        {
-          withCredentials: true,
-        }
+        { message, imageUrl },
+        { withCredentials: true }
       );
 
       setMessage("");
@@ -57,20 +50,12 @@ const Post = () => {
       fetchPost();
     } catch (error) {
       console.error("Error creating post:", error);
-    } finally {
-      setImageFile(null);
-      setImgUrl("");
-      setMessage("");
     }
   };
 
   useEffect(() => {
     fetchPost();
   }, []);
-
-  if (posts.length === 0) {
-    return <div className="text-xl text-center">Loading...</div>;
-  }
 
   return (
     <div className="p-4">
@@ -105,7 +90,7 @@ const Post = () => {
             />
             <input
               type="file"
-              accept=".jpg, .jpeg, .png"
+              accept=".jpg,.jpeg,.png"
               className="file-input file-input-bordered w-full"
               onChange={(e) => setImageFile(e.target.files[0])}
               required
