@@ -10,7 +10,6 @@ const ChatLayout = () => {
 
   // Access isPremium from user.data
   const isPremium = user?.data?.isPremium;
-  // console.log("isPremium:", isPremium);
 
   // Show Buy Premium screen if not premium
   if (!isPremium) {
