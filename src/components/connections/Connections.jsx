@@ -34,18 +34,10 @@ const Connections = () => {
 
   // console.log(connections);
 
-  if (!connections) {
+  if (!connections || connections.length === 0) {
     return (
       <div className="flex justify-center items-center h-screen text-xl text-base-content bg-base-100">
-        Loading...
-      </div>
-    );
-  }
-
-  if (connections.length === 0) {
-    return (
-      <div className="flex justify-center items-center h-screen text-xl text-base-content bg-base-100">
-        Loading
+        No Connections Found
       </div>
     );
   }
