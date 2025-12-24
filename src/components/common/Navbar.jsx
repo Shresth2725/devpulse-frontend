@@ -231,12 +231,12 @@ const Navbar = () => {
         {user ? (
           <div className="navbar-center">
             <Link to="/" className="btn btn-ghost text-xl">
-              DevPulse
+              Shresth
             </Link>
           </div>
         ) : (
           <div className="text-xl font-bold mr-20 fixed left-0 pl-10">
-            DevPulse
+            Shresth
           </div>
         )}
 
