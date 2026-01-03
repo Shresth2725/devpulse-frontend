@@ -231,7 +231,7 @@ const Navbar = () => {
         {user ? (
           <div className="navbar-center">
             <Link to="/" className="btn btn-ghost text-xl">
-              70173XXXXX
+              DevPulse
             </Link>
           </div>
         ) : (
